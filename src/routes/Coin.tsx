@@ -31,7 +31,7 @@ const Container = styled.div`
 `;
 
 const Header = styled.header`
-  height: 15vh;
+  height: 10vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,6 +82,16 @@ const Tab = styled.span<{ isActive: boolean }>`
     padding: 7px 0px;
 
     display: block;
+  }
+`;
+
+const Back = styled.span`
+  a {
+    text-align: center;
+    display: flex;
+    margin: 30px 0px 0px 30px;
+    width: 30px;
+    font-size: 20px;
   }
 `;
 
@@ -164,6 +174,7 @@ function Coin() {
       refetchInterval: 5000,
     }
   );
+
   const loading = infoLoading || tickersLoading;
   return (
     <Container>
@@ -172,6 +183,9 @@ function Coin() {
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
         </title>
       </Helmet>
+      <Back>
+        <Link to={`/`}>👈</Link>
+      </Back>
       <Header>
         <Title>
           {state?.name ? state.name : loading ? "Loading..." : infoData?.name}
@@ -217,7 +231,7 @@ function Coin() {
 
           <Switch>
             <Route path={`/:coinId/price`}>
-              <Price />
+              <Price coinId={coinId} />
             </Route>
             <Route path={`/:coinId/chart`}>
               <Chart coinId={coinId} />
